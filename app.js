@@ -1,30 +1,43 @@
-var createError = require('http-errors');
-var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
+var express = require('express');
 var logger = require('morgan');
 var compression = require('compression');
 var helmet = require('helmet');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var createError = require('http-errors');
+var favicon = require('serve-favicon');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var allBooksRouter = require('./routes/books');
+var newBookRouter = require('./routes/bookNew');
+var bookDetailRouter = require('./routes/bookDetail');
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
+// view engine setup. look for views in this directory and the specified subdirectories
+app.set('views', [
+  path.join(__dirname, 'views'), 
+  path.join(__dirname, 'views/pages'), 
+  path.join(__dirname, 'views/components')
+]);
 app.set('view engine', 'pug');
 
 app.use(helmet()); // Set HTTP headers for security
-app.use(compression()); //Compress all routes
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(favicon(path.join(__dirname, "public", "favicon.ico"))); // Serve the favicon
+app.use(compression()); // Compress all routes
+app.use(cookieParser()); // Parse cookies
+app.use(logger('dev')); // Log errors
+app.use(bodyParser.json()); // Parse the request body
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/books', allBooksRouter);
+app.use('/books/new', newBookRouter);
+app.use('/books/:id', bookDetailRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

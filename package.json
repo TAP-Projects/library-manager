@@ -11,6 +11,7 @@
     "startdebug": "DEBUG=express:* npm run startdev"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.4",
     "debug": "^4.0.0",
@@ -18,6 +19,7 @@
     "helmet": "^3.21.2",
     "http-errors": "^1.6.3",
     "morgan": "^1.9.1",
-    "pug": "^2.0.0"
+    "pug": "^2.0.0",
+    "serve-favicon": "^2.5.0"
   }
 }
