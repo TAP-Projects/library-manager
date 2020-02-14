@@ -1,7 +1,7 @@
 extends ../components/layout
 
 block content
-    - console.log(res,req, book)
+    - console.log(res, req, book)
     form 
         p
             label(for='title') Title
@@ -18,8 +18,8 @@ block content
         p
             input(type='submit' value='Update Book')
             
-        form(method='post' action='' onsubmit=``)
-            p
-                a.button(href='all_books.html') Cancel
-            p
-                input(type='submit' value='Delete Book')
+    form(method='post' action='' onsubmit=``)
+        p
+            a.button(href='books') Cancel
+        p
+            input(type='submit' value='Delete Book')

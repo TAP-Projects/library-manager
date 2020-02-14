@@ -9,7 +9,6 @@ var createError = require('http-errors');
 var favicon = require('serve-favicon');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var allBooksRouter = require('./routes/books');
 var newBookRouter = require('./routes/bookNew');
 var bookDetailRouter = require('./routes/bookDetail');
@@ -34,7 +33,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/books', allBooksRouter);
 app.use('/books/new', newBookRouter);
 app.use('/books/:id', bookDetailRouter);
