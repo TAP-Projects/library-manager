@@ -1,6 +1,5 @@
 'use strict';
 const Sequelize = require('sequelize');
-const moment = require('moment');
 
 const options = {
     title: {
@@ -34,19 +33,10 @@ const options = {
 }
 
 module.exports = sequelize => {
-    class Book extends Sequelize.Model {
-        // publishedAt will take the unformatted datetime provided by SQLite via 'createdAt' and format it using Moment.js.
-        // publishedAt(){
-        //     const date = moment(this.createdAt).format('MMMM D, YYYY, h:mma');
-        //     return date;
-        // }
-        // On the homepage, just show a snippet of the article. The first 200 characters.
-        // shortDescription(){
-        //     const shortDesc = this.body.length > 200 ? this.body.substring(0,200) + '...' : this.body;
-        //     return shortDesc;
-        // }
-    }
+    // Create the Book model class
+    class Book extends Sequelize.Model {}
+    // Initialize the class with options, passing the sequelize object
     Book.init(options, {sequelize});
-
+    // Return the initialized Book model
     return Book;
 };

@@ -1,7 +1,8 @@
 extends ../components/layout 
-
 block content
-
+    //- The route renders, but the data isn't showing up
+    //- I'm not connecting to the existing db, but I define library.db as the storage option in config/config.js
+    - console.log('\x1b[36m%s\x1b[0m', "From the AllBooks template: ", books)
     h1 All Books
     p
         a.button(href='books/new') Create New Book
@@ -15,8 +16,9 @@ block content
         tbody
             each book in books
                 tr
-                    td
-                        a(href=`books/${book.id}`)= book.title
-                    td= book.author
-                    td= book.genre
-                    td= book.year
+                    //- td
+                    //-     a(href='books/' + book.id)= book.title
+                    //- td= book.author
+                    //- td= book.genre
+                    //- td= book.year
+                    td It rendered
