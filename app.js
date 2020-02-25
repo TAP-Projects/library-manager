@@ -8,11 +8,6 @@ var bodyParser = require('body-parser');
 var createError = require('http-errors');
 var favicon = require('serve-favicon');
 
-var indexRouter = require('./routes/index');
-var allBooksRouter = require('./routes/books');
-var newBookRouter = require('./routes/bookNew');
-var bookDetailRouter = require('./routes/bookDetail');
-
 var app = express();
 
 // view engine setup. look for views in this directory and the specified subdirectories
@@ -31,6 +26,11 @@ app.use(logger('dev')); // Log errors
 app.use(bodyParser.json()); // Parse the request body
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+var indexRouter = require('./routes/index');
+var allBooksRouter = require('./routes/books');
+var newBookRouter = require('./routes/bookNew');
+var bookDetailRouter = require('./routes/bookDetail');
 
 app.use('/', indexRouter);
 app.use('/books', allBooksRouter);
