@@ -1,13 +1,15 @@
-var express = require('express');
-var router = express.Router();
-var allModels = require('../models');
+const express = require('express');
+const router = express.Router();
+const models = require('../models');
+const asyncHandler = require('../scripts');
 
 /* GET all books page. */
-router.get('/', async function(req, res, next) {
-  // Use the modelInstance.findAll() method to get the books
-  const books = await allModels.Book.findAll()
-  // console.log('\x1b[33m%s\x1b[0m', "From the Books Route: ", allModels.Book)
-  res.render('AllBooks', {books});
-});
+router.get('/', asyncHandler( async (req, res, next) => {
+  
+  const books = await models.Book.findAll({order: [['createdAt', 'DESC']]}) 
+  res.render('AllBooks', {books, title: "Library"});
+  next();
+
+}));
 
 module.exports = router;

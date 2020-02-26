@@ -2,7 +2,8 @@ extends ../components/layout
 
 block content
     //- console.log(res, req, book)
-    form 
+    form(method='POST' action='/' + book.id) 
+        p(class='added-on') Added to library on #{book.addedOn()}
         p
             label(for='title') Title
             input#title(name='title' type='text' value=`${book.title}`)
@@ -16,10 +17,10 @@ block content
             label(for='year') Year
             input#year(name='year' type='text' value=`${book.year}`)
         p
-            input(type='submit' value='Update Book')
+            input(name='update' id='update' type='submit' value='Update Book')
             
-    form(method='post' action='' onsubmit=``)
+    form(method='POST' action='')
         p
-            a.button(href='books') Cancel
+            input(name='delete' id='delete' type='submit' value='Delete Book')
         p
-            input(type='submit' value='Delete Book')
+            a.button(href='/books') Cancel

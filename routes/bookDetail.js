@@ -1,22 +1,28 @@
-var express = require('express');
-var router = express.Router();
-// Import the model instance
-var allModels = require('../models');
-
+const express = require('express');
+const router = express.Router();
+const models = require('../models');
+const asyncHandler = require('../scripts')
 
 /* GET book detail page. */
-router.get('/', async function(req, res, next) {
+router.get('/:id', asyncHandler(async (req, res, next) => {
+    
     // Store the requested book's id
-    //const theId = parseInt(req.params.id * 1, 10);
-    console.log("The id is: ", req.params.id);
-   // console.log("The response is: ", res);
+    const theId = parseInt(req.params.id * 1, 10);
+    
     // Find the matching book using modelInstance.findByPk()
-    const book = await allModels.Book.findByPk(2)
-    // console.log("The matched book item: ", book);
+    const book = await models.Book.findByPk(theId)
+    
     // Render the book detail view with the requested book's details
-    res.render('BookDetail', {book});
-});
+    res.render('BookDetail', {book, title: book.title});
+}));
 
-// router.post('/', function(req, res, next) {});
+router.post('/:id', asyncHandler( async (req, res, next)=>{
+
+    const theId = parseInt(req.params.id, 10);
+    const book = await models.Book.findByPk(theId);
+    const updated = await models.Book.update(req.body);
+    res.redirect('/books/' + book.id);
+
+} ));
 
 module.exports = router;

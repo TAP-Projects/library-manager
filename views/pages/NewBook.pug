@@ -1,20 +1,21 @@
 extends ../components/layout
 block content
-    h1 New Book
-    form
+    h1 Add a New Book
+    //- Debug: This is the right action path
+    form(method='POST' action='/books/new')
         p
             label(for='title') Title
-            input#title(name='title' type='text')
+            input#title(name='title' type='text' require)
         p
             label(for='author') Author
-            input#author(name='author' type='text')
+            input#author(name='author' type='text' require)
         p
             label(for='genre') Genre
-            input#genre(name='genre' type='text')
+            input#genre(name='genre' type='text' require)
         p
             label(for='year') Year
-            input#year(name='year' type='text')
+            input#year(name='year' type='number' min='0' max='2020' value='2020' require)
         p
-            input(type='submit' value='Create New Book')
+            input(type='submit')
         p
-            a.button(href='all_books.html') Cancel
+            a.button(href='/books') Cancel

@@ -1,5 +1,6 @@
 'use strict';
 const Sequelize = require('sequelize');
+const moment = require('moment');
 
 const options = {
     title: {
@@ -34,7 +35,11 @@ const options = {
 
 module.exports = sequelize => {
     // Create the Book model class
-    class Book extends Sequelize.Model {}
+    class Book extends Sequelize.Model {
+        addedOn(){
+            return moment(this.createdAt).format('MMMM, D, YYYY');
+        }
+    }
     // Initialize the class with options, passing the sequelize object
     Book.init(options, {sequelize});
     // Return the initialized Book model

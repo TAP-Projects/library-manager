@@ -33,9 +33,8 @@ var newBookRouter = require('./routes/bookNew');
 var bookDetailRouter = require('./routes/bookDetail');
 
 app.use('/', indexRouter);
-app.use('/books', allBooksRouter);
 app.use('/books/new', newBookRouter);
-app.use('/books/:id', bookDetailRouter);
+app.use('/books', allBooksRouter, bookDetailRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
