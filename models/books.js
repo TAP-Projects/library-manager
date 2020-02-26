@@ -39,6 +39,9 @@ module.exports = sequelize => {
         addedOn(){
             return moment(this.createdAt).format('MMMM, D, YYYY');
         }
+        updatedOn(){
+            return moment(this.updatedAt).format('MMMM, D, YYYY');
+        }
     }
     // Initialize the class with options, passing the sequelize object
     Book.init(options, {sequelize});

@@ -10,10 +10,8 @@ router.get('/', function(req, res, next) {
 
 // POST new book data
 router.post('/', asyncHandler(async (req, res, next) => {
-    
     const book = await models.Book.create(req.body);
     res.redirect('/books/' + book.id);
-
 }));
 
 module.exports = router;

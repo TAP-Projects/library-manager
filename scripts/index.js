@@ -7,6 +7,7 @@ function asyncHandler(cb){
             catch(error){
                 res.status(500).send(error);
             }
+            return;
         }
     )
 }
