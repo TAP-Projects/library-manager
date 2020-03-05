@@ -4,6 +4,7 @@ const models = require('../models');
 const asyncHandler = require('../scripts')
 
 /* GET book detail page. */
+<<<<<<< HEAD
 router.get('/:id', asyncHandler(async (req, res, next) => {
     
     // Store the requested book's id
@@ -23,6 +24,18 @@ router.post('/:id', asyncHandler( async (req, res, next)=>{
     await book.update(req.body);
     res.redirect('/books/' + book.id);
 
+=======
+router.get('/:id', asyncHandler( async (req, res, next) => {
+    const book = await models.Book.findByPk(req.params.id)
+    res.render('BookDetail', {book, title: book.title});
+}));
+
+router.post('/:id', asyncHandler( async (req, res, next) => {
+    const book = await models.Book.findByPk(req.params.id);
+    await book.update(req.body);
+    res.redirect(`/books/${book.id}`);
+    return;
+>>>>>>> 4ec0fead6e0633cf16b1460bd70f9a769314d7df
 } ));
 
 module.exports = router;

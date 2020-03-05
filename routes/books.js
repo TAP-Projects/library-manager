@@ -6,7 +6,7 @@ const asyncHandler = require('../scripts');
 /* GET all books page. */
 router.get('/', asyncHandler( async (req, res, next) => {
   
-  const books = await models.Book.findAll({order: [['createdAt', 'DESC']]}) 
+  const books = await models.Book.findAll({order: [['createdAt', 'DESC']]});
   res.render('AllBooks', {books, title: "Library"});
   next();
 
