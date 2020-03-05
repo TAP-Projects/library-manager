@@ -7,7 +7,7 @@ const asyncHandler = require('../scripts')
 router.get('/:id', asyncHandler(async (req, res, next) => {
     
     // Store the requested book's id
-    const theId = parseInt(req.params.id * 1, 10);
+    const theId = req.params.id;
     
     // Find the matching book using modelInstance.findByPk()
     const book = await models.Book.findByPk(theId)
@@ -18,9 +18,9 @@ router.get('/:id', asyncHandler(async (req, res, next) => {
 
 router.post('/:id', asyncHandler( async (req, res, next)=>{
 
-    const theId = parseInt(req.params.id, 10);
+    const theId = req.params.id;
     const book = await models.Book.findByPk(theId);
-    const updated = await models.Book.update(req.body);
+    await book.update(req.body);
     res.redirect('/books/' + book.id);
 
 } ));
